@@ -90,11 +90,20 @@ public class EmployeeDetails {
         this.building = building;
     }
 
+    public Position getPosition() {
+        return position;
+    }
+
+    public void setPosition(Position position) {
+        this.position = position;
+    }
+
     @Override
     public String toString() {
         return "EmployeeDetails{" +
                 "employee=" + employee +
                 ", building=" + building +
+                ", position=" + position +
                 ", id=" + id +
                 ", salary=" + salary +
                 ", firstName='" + firstName + '\'' +

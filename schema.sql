@@ -73,12 +73,12 @@ DROP TABLE IF EXISTS `employee_reviews`;
 
 CREATE TABLE `employee_reviews` (
 	`id` INTEGER NOT NULL AUTO_INCREMENT,
-	`employee_email` VARCHAR(80) NOT NULL,
-	`reviewer_email` VARCHAR(80) NOT NULL,
+	`employee_details_id` INTEGER NOT NULL,
+	`reviewer_details_id` INTEGER NOT NULL,
 	`score` INTEGER NOT NULL,
 	`notes` TEXT,
-	FOREIGN KEY (`employee_email`) REFERENCES `employees` (`email`),
-	FOREIGN KEY (`reviewer_email`) REFERENCES `employees` (`email`), 
+	FOREIGN KEY (`employee_details_id`) REFERENCES `employee_details` (`id`),
+	FOREIGN KEY (`reviewer_details_id`) REFERENCES `employee_details` (`id`), 
 	PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
@@ -99,10 +99,6 @@ DROP TABLE IF EXISTS `products`;
 CREATE TABLE `products` (
 	`id` INTEGER NOT NULL AUTO_INCREMENT,
 	`name` VARCHAR(100) NOT NULL,
-	`quantity` INTEGER NOT NULL,
-	`cost` FLOAT NOT NULL,
-	`value` FLOAT NOT NULL,
-	`sales` INTEGER NOT NULL,
 	PRIMARY KEY(`id`)
 );
 
@@ -121,6 +117,10 @@ DROP TABLE IF EXISTS `building_to_product`;
 CREATE TABLE `building_to_product`(
 	building_id INTEGER NOT NULL,
     product_id INTEGER NOT NULL,
+	`quantity` INTEGER NOT NULL,
+	`cost` FLOAT NOT NULL,
+	`value` FLOAT NOT NULL,
+	`sales` INTEGER NOT NULL,
     FOREIGN KEY (building_id) REFERENCES buildings(id),
     FOREIGN KEY (product_id) REFERENCES products(id)
 );

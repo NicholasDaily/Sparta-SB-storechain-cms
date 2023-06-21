@@ -18,8 +18,9 @@ public class BuildingStats {
     @Column(name="income")
     private int income;
 
-    @OneToMany(mappedBy="building", cascade = {CascadeType.MERGE, CascadeType.DETACH, CascadeType.PERSIST, CascadeType.REFRESH})
-    private List<EmployeeDetails> employees;
+    @OneToOne
+    @JoinColumn(name = "building_id")
+    Building building;
 
     @Column(name="employee_quantity")
     private int employeeQuantity;
@@ -51,14 +52,6 @@ public class BuildingStats {
         this.income = income;
     }
 
-    public List<EmployeeDetails> getEmployees() {
-        return employees;
-    }
-
-    public void setEmployees(List<EmployeeDetails> employees) {
-        this.employees = employees;
-    }
-
     public int getEmployeeQuantity() {
         return employeeQuantity;
     }
@@ -73,7 +66,6 @@ public class BuildingStats {
                 "id=" + id +
                 ", expenses=" + expenses +
                 ", income=" + income +
-                ", employees=" + employees +
                 ", employeeQuantity=" + employeeQuantity +
                 '}';
     }

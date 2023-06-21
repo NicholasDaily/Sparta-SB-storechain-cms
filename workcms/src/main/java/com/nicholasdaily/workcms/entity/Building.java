@@ -2,6 +2,8 @@ package com.nicholasdaily.workcms.entity;
 
 import jakarta.persistence.*;
 
+import java.util.List;
+
 @Entity
 @Table(name="building")
 public class Building {
@@ -16,10 +18,18 @@ public class Building {
     @Column(name = "phone_number")
     private String phoneNumber;
 
-    @OneToOne
+    @OneToMany(mappedBy="building", cascade = {CascadeType.DETACH, CascadeType.MERGE, CascadeType.PERSIST, CascadeType.REFRESH})
+    List<EmployeeDetails> employeeDetails;
+
+    @OneToOne(cascade = {CascadeType.DETACH, CascadeType.MERGE, CascadeType.PERSIST, CascadeType.REFRESH})
     @JoinColumn(name = "type_id")
     BuildingType buildingType;
 
+    @OneToOne(mappedBy = "building", cascade = CascadeType.ALL)
+    BuildingStats buildingStats;
+
+    @OneToMany(mappedBy = "building", cascade = CascadeType.ALL)
+    List<BuildingToProduct> products;
 
     public Building() {
     }
