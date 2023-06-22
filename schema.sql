@@ -32,7 +32,7 @@ CREATE TABLE `building_type`(
 	`description` VARCHAR(300) NOT NULL,
 	PRIMARY KEY (`id`)
 );
-
+INSERT INTO building_type(`name`, `description`) VALUES("Store", "Product Sale point");
 DROP TABLE IF EXISTS `buildings`;
 
 CREATE TABLE `buildings`(
@@ -44,6 +44,8 @@ CREATE TABLE `buildings`(
 	FOREIGN KEY (`type_id`) REFERENCES `building_type`(`id`)
 );
 
+INSERT INTO buildings(address, phone_number, type_id) VALUES ("123 Street Name, London, England", "+44 0000 000000", 1);
+
 DROP TABLE IF EXISTS `positions`;
 
 CREATE TABLE `positions`(
@@ -52,7 +54,7 @@ CREATE TABLE `positions`(
 	`description` VARCHAR(300) NOT NULL,
 	PRIMARY KEY (`id`)
 );
-
+INSERT INTO positions(`name`, `description`) VALUES("Manager", "Assist in day to day activities of regular employees including scheduling");
 DROP TABLE IF EXISTS `employee_details`;
 
 CREATE TABLE `employee_details` (
@@ -68,6 +70,7 @@ CREATE TABLE `employee_details` (
 	FOREIGN KEY (`building_id`) REFERENCES `buildings`(`id`),
 	PRIMARY KEY(`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+INSERT INTO employee_details(employee_email, building_id, position_id, salary, first_name, last_name) VALUES("admin@gmail.com", 1, 1, 19500, "nicholas", "daily");
 
 DROP TABLE IF EXISTS `employee_reviews`;
 

@@ -1,5 +1,7 @@
 package com.nicholasdaily.workcms.entity;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import jakarta.persistence.*;
 
 
@@ -8,10 +10,12 @@ import jakarta.persistence.*;
 public class EmployeeDetails {
     @OneToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
     @JoinColumn(name="employee_email")
+    @JsonBackReference
     private Employee employee;
 
     @OneToOne
     @JoinColumn(name="building_id")
+    @JsonManagedReference
     Building building;
 
     @OneToOne
