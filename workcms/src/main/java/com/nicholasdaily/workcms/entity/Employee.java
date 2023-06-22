@@ -1,5 +1,7 @@
 package com.nicholasdaily.workcms.entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import jakarta.persistence.*;
 
 @Entity
@@ -10,14 +12,16 @@ public class Employee {
     private String email;
 
     @Column(name="password")
+    @JsonIgnore
     private String Password;
 
     @Column(name="enabled")
     private boolean enabled;
 
     @OneToOne(mappedBy = "employee",
-              fetch = FetchType.EAGER,
+              fetch = FetchType.LAZY,
               cascade = CascadeType.ALL)
+    @JsonManagedReference
     private EmployeeDetails details;
 
     @OneToOne(mappedBy = "employee", cascade = {CascadeType.ALL})
@@ -40,6 +44,7 @@ public class Employee {
         this.email = email;
     }
 
+    @JsonIgnore
     public String getPassword() {
         return Password;
     }

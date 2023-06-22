@@ -1,11 +1,13 @@
 package com.nicholasdaily.workcms.entity;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import jakarta.persistence.*;
 
 import java.util.List;
 
 @Entity
-@Table(name="building")
+@Table(name="buildings")
 public class Building {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -19,6 +21,7 @@ public class Building {
     private String phoneNumber;
 
     @OneToMany(mappedBy="building", cascade = {CascadeType.DETACH, CascadeType.MERGE, CascadeType.PERSIST, CascadeType.REFRESH})
+    @JsonBackReference
     List<EmployeeDetails> employeeDetails;
 
     @OneToOne(cascade = {CascadeType.DETACH, CascadeType.MERGE, CascadeType.PERSIST, CascadeType.REFRESH})
@@ -69,6 +72,30 @@ public class Building {
 
     public void setBuildingType(BuildingType buildingType) {
         this.buildingType = buildingType;
+    }
+
+    public List<EmployeeDetails> getEmployeeDetails() {
+        return employeeDetails;
+    }
+
+    public void setEmployeeDetails(List<EmployeeDetails> employeeDetails) {
+        this.employeeDetails = employeeDetails;
+    }
+
+    public BuildingStats getBuildingStats() {
+        return buildingStats;
+    }
+
+    public void setBuildingStats(BuildingStats buildingStats) {
+        this.buildingStats = buildingStats;
+    }
+
+    public List<BuildingToProduct> getProducts() {
+        return products;
+    }
+
+    public void setProducts(List<BuildingToProduct> products) {
+        this.products = products;
     }
 
     @Override
